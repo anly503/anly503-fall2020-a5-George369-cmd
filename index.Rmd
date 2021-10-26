@@ -4,19 +4,10 @@ title: "Plotly"
 ## Question:
 ### Which application generally costs the most energy in a normal household?
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-library(ggplot2)
-library(plotly)
-sums <- read.csv("sums.csv")
-fig <- plot_ly(sums, x = ~date, y = ~sum,
-               color = ~category,
-               type='scatter', mode='lines',
-               hovertemplate=paste('<b>',sums$category,'</b><br>Date=%{x}<br>Sum=%{y:.2f}')) %>% 
-  plotly::layout(xaxis=list(title='Date'),
-         yaxis=list(title='Summation'),
-         title = 'Total Expenditure of Energy',
-         showlegend=FALSE)
-fig
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(htmltools)
+includeHTML("sums.html")
 ```
 
 
