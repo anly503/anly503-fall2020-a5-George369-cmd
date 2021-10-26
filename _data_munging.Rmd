@@ -1,0 +1,110 @@
+---
+title: "_data_munging"
+author: "George Sun"
+date: "10/25/2021"
+output: html_document
+---
+
+```{r}
+#load all files from csv's
+lamp <- read.csv("lamp_06.csv", check.names = FALSE)
+lamp <- lamp[-c(1)]
+lamp[lamp<0] <- 0
+laptop <- read.csv("laptop_06.csv", check.names = FALSE)
+laptop <- laptop[-c(1)]
+laptop[laptop<0] <- 0
+router <- read.csv("router_06.csv", check.names = FALSE)
+router <- router[-c(1)]
+router[router<0] <- 0
+fridge <- read.csv("fridge_06.csv", check.names = FALSE)
+fridge <- fridge[-c(1)]
+fridge[fridge<0] <- 0
+coffee <- read.csv("coffee_06.csv", check.names = FALSE)
+coffee <- coffee[-c(1)]
+coffee[coffee<0] <- 0
+enter06 <- read.csv("entertain_06.csv", check.names = FALSE)
+enter06 <- enter06[-c(1)]
+enter06[enter06<0] <- 0
+kettle <- read.csv("kettle_06.csv", check.names = FALSE)
+kettle <- kettle[-c(1)]
+kettle[kettle<0] <- 0
+```
+
+```{r}
+#get medians from each column of each dataset
+lamp_sums = data.frame(apply(lamp,2,sum))
+colnames(lamp_sums)[1] = "sum"
+lamp_sums$date = row.names(lamp_sums)
+lamp_sums$category = "lamp"
+
+laptop_sums = data.frame(apply(laptop,2,sum))
+colnames(laptop_sums)[1] = "sum"
+laptop_sums$date = row.names(laptop_sums)
+laptop_sums$category = "laptop"
+
+router_sums = data.frame(apply(router,2,sum))
+colnames(router_sums)[1] = "sum"
+router_sums$date = row.names(router_sums)
+router_sums$category = "router"
+
+fridge_sums = data.frame(apply(fridge,2,sum))
+colnames(fridge_sums)[1] = "sum"
+fridge_sums$date = row.names(fridge_sums)
+fridge_sums$category = "fridge"
+
+coffee_sums = data.frame(apply(coffee,2,sum))
+colnames(coffee_sums)[1] = "sum"
+coffee_sums$date = row.names(coffee_sums)
+coffee_sums$category = "coffee"
+
+enter_sums = data.frame(apply(enter06,2,sum))
+colnames(enter_sums)[1] = "sum"
+enter_sums$date = row.names(enter_sums)
+enter_sums$category = "entertainment"
+
+kettle_sums = data.frame(apply(kettle,2,sum))
+colnames(kettle_sums)[1] = "sum"
+kettle_sums$date = row.names(kettle_sums)
+kettle_sums$category = "kettle"
+```
+
+
+```{r}
+library(dplyr)
+sums <- full_join(lamp_sums, laptop_sums, by = c('date', 'sum', 'category'))
+sums <- full_join(sums, router_sums, by = c('date', 'sum', 'category'))
+sums <- full_join(sums, fridge_sums, by = c('date', 'sum', 'category'))
+sums <- full_join(sums, coffee_sums, by = c('date', 'sum', 'category'))
+sums <- full_join(sums, enter_sums, by = c('date', 'sum', 'category'))
+sums <- full_join(sums, kettle_sums, by = c('date', 'sum', 'category'))
+write.csv(sums, "sums.csv")
+```
+
+```{r}
+#combine all entertainments together
+enter06_sums = data.frame(apply(enter06,2,sum))
+colnames(enter06_sums)[1] = "sum"
+enter06_sums$date = row.names(enter06_sums)
+enter06_sums$from = "06"
+
+enter05 <- read.csv("enter_05.csv", check.names = FALSE)
+enter05 <- enter05[-c(1)]
+enter05[enter05<0] <- 0
+enter05_sums = data.frame(apply(enter05,2,sum))
+colnames(enter05_sums)[1] = "sum"
+enter05_sums$date = row.names(enter05_sums)
+enter05_sums$from = "05"
+
+enter04 <- read.csv("enter_04.csv", check.names = FALSE)
+enter04 <- enter04[-c(1)]
+enter04[enter04<0] <- 0
+enter04_sums = data.frame(apply(enter04,2,sum))
+colnames(enter04_sums)[1] = "sum"
+enter04_sums$date = row.names(enter04_sums)
+enter04_sums$from = "04"
+
+enters <- full_join(enter06_sums, enter05_sums, by = c('date', 'sum', 'from'))
+enters <- full_join(enters, enter04_sums, by = c('date', 'sum', 'from'))
+write.csv(enters, "entertainments.csv")
+```
+

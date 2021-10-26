@@ -1,0 +1,103 @@
+---
+title: "combine_df"
+author: "George Sun"
+date: "2021/10/25"
+output: html_document
+---
+```{r}
+#define a function used to combine all datasets in specific folder
+combine_df <- function(dir) {
+  setwd(dir)
+  for (data in list.files()){
+   
+    # Create the first data if no data exist yet
+    if (!exists("ds")){
+      ds <- read.csv(data, header=FALSE)
+      #new column name of date
+      cn <- substring(data, 0, 10)
+      colnames(ds)[1] <- cn
+    }
+    
+    # if data already exist, then append it together
+    else {
+      tempory <- read.csv(data, header=FALSE)
+      #new column name
+      new_cn <- substring(data, 0, 10)
+      colnames(tempory)[1] <- new_cn
+      ds <- cbind(ds, tempory)
+      rm(tempory)
+    }
+  }
+  return(ds)
+}
+```
+
+```{r}
+#combine lamp data
+lamp_06 <- combine_df("/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/06_plugs/01")
+path <- "/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/lamp_06.csv"
+write.csv(lamp_06, file = path)
+```
+
+
+```{r}
+#combine laptop data
+laptop_06 <- combine_df("/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/06_plugs/02")
+path <- "/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/laptop_06.csv"
+write.csv(laptop_06, file = path)
+```
+
+```{r}
+#combine router data
+router_06 <- combine_df("/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/06_plugs/03")
+path <- "/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/router_06.csv"
+write.csv(router_06, file = path)
+```
+
+```{r}
+#combine coffee data
+coffee_06 <- combine_df("/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/06_plugs/04")
+path <- "/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/coffee_06.csv"
+write.csv(coffee_06, file = path)
+```
+
+```{r}
+#combine entertainment data
+entertain_06 <- combine_df("/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/06_plugs/05")
+path <- "/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/entertain_06.csv"
+write.csv(entertain_06, file = path)
+```
+
+```{r}
+#combine fridge data
+fridge_06 <- combine_df("/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/06_plugs/06")
+path <- "/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/fridge_06.csv"
+write.csv(fridge_06, file = path)
+```
+
+```{r}
+#combine kettle data
+kettle_06 <- combine_df("/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/06_plugs/07")
+path <- "/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/kettle_06.csv"
+write.csv(kettle_06, file = path)
+```
+
+
+```{r}
+#combine entertain data from 05
+enter_05 <- combine_df("/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/05_plugs/06")
+path <- "/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/enter_05.csv"
+write.csv(enter_05, file = path)
+```
+
+
+```{r}
+#combine entertain data from 04
+enter_04 <- combine_df("/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/04_plugs/07")
+path <- "/Users/sunhaoxian/Desktop/GU/ANLY503/A5/anly503-fall2020-a5-George369-cmd/enter_04.csv"
+write.csv(enter_04, file = path)
+```
+
+
+
+

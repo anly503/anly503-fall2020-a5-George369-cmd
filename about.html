@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Altair</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">My Website</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Altair</h1>
+
+</div>
+
+
+<div id="question" class="section level2">
+<h2>Question:</h2>
+<div id="among-all-3-households-which-family-has-ever-reached-the-most-entertainment-expenditure" class="section level4">
+<h4>Among all 3 households, which family has ever reached the most entertainment expenditure?</h4>
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "point", "encoding": {"color": {"type": "nominal", "field": "from"}, "size": {"type": "quantitative", "field": "sum"}, "tooltip": [{"type": "nominal", "field": "date"}, {"type": "quantitative", "field": "sum"}, {"type": "nominal", "field": "from"}], "x": {"type": "nominal", "field": "date", "scale": {"zero": false}, "title": "date"}, "y": {"type": "quantitative", "field": "sum", "scale": {"zero": false}, "title": "Total Expenditure"}}}, {"mark": {"type": "line", "size": 4}, "encoding": {"color": {"type": "nominal", "field": "from"}, "size": {"type": "quantitative", "field": "sum"}, "tooltip": [{"type": "nominal", "field": "date"}, {"type": "quantitative", "field": "sum"}, {"type": "nominal", "field": "from"}], "x": {"type": "nominal", "field": "date", "scale": {"zero": false}, "title": "date"}, "y": {"type": "quantitative", "field": "sum", "scale": {"zero": false}, "title": "Total Expenditure"}}}], "data": {"name": "data-7cbc1b8b685549fc999811e4c0facd19"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-7cbc1b8b685549fc999811e4c0facd19": [{"Unnamed: 0": 1, "sum": 2216029.7051, "date": "2012-06-27", "from": 6}, {"Unnamed: 0": 2, "sum": 1084569.1857, "date": "2012-06-28", "from": 6}, {"Unnamed: 0": 3, "sum": 3640591.9274, "date": "2012-06-29", "from": 6}, {"Unnamed: 0": 4, "sum": 2507454.3644, "date": "2012-06-30", "from": 6}, {"Unnamed: 0": 5, "sum": 2294951.848, "date": "2012-07-01", "from": 6}, {"Unnamed: 0": 6, "sum": 1296853.165, "date": "2012-07-02", "from": 6}, {"Unnamed: 0": 7, "sum": 2032137.1789, "date": "2012-07-03", "from": 6}, {"Unnamed: 0": 8, "sum": 2162138.4918, "date": "2012-07-04", "from": 6}, {"Unnamed: 0": 9, "sum": 5013555.7697, "date": "2012-07-05", "from": 6}, {"Unnamed: 0": 10, "sum": 2444157.9373, "date": "2012-07-06", "from": 6}, {"Unnamed: 0": 11, "sum": 3086132.8511, "date": "2012-07-07", "from": 6}, {"Unnamed: 0": 12, "sum": 2347355.3445, "date": "2012-07-08", "from": 6}, {"Unnamed: 0": 13, "sum": 1767055.8338, "date": "2012-07-09", "from": 6}, {"Unnamed: 0": 14, "sum": 2045135.8943, "date": "2012-07-10", "from": 6}, {"Unnamed: 0": 15, "sum": 1306079.1309, "date": "2012-07-11", "from": 6}, {"Unnamed: 0": 16, "sum": 2236497.5953, "date": "2012-07-12", "from": 6}, {"Unnamed: 0": 17, "sum": 1813411.7947, "date": "2012-07-13", "from": 6}, {"Unnamed: 0": 18, "sum": 476409.5831, "date": "2012-07-14", "from": 6}, {"Unnamed: 0": 19, "sum": 821389.0084, "date": "2012-07-15", "from": 6}, {"Unnamed: 0": 20, "sum": 1307468.675, "date": "2012-07-16", "from": 6}, {"Unnamed: 0": 21, "sum": 1305034.8453, "date": "2012-07-17", "from": 6}, {"Unnamed: 0": 22, "sum": 1301885.5741, "date": "2012-07-18", "from": 6}, {"Unnamed: 0": 23, "sum": 1303033.6468, "date": "2012-07-19", "from": 6}, {"Unnamed: 0": 24, "sum": 1301399.017, "date": "2012-07-20", "from": 6}, {"Unnamed: 0": 25, "sum": 2025062.5416, "date": "2012-07-21", "from": 6}, {"Unnamed: 0": 26, "sum": 2280338.8053, "date": "2012-07-22", "from": 6}, {"Unnamed: 0": 27, "sum": 1777683.7487, "date": "2012-07-23", "from": 6}, {"Unnamed: 0": 28, "sum": 1307507.0337, "date": "2012-07-24", "from": 6}, {"Unnamed: 0": 29, "sum": 1511415.1438, "date": "2012-07-25", "from": 6}, {"Unnamed: 0": 30, "sum": 1562051.5358, "date": "2012-07-26", "from": 6}, {"Unnamed: 0": 31, "sum": 1749524.7198, "date": "2012-07-27", "from": 6}, {"Unnamed: 0": 32, "sum": 1889647.1995, "date": "2012-07-28", "from": 6}, {"Unnamed: 0": 33, "sum": 2467098.2396, "date": "2012-07-29", "from": 6}, {"Unnamed: 0": 34, "sum": 2086605.4641, "date": "2012-07-30", "from": 6}, {"Unnamed: 0": 35, "sum": 1329537.2463, "date": "2012-07-31", "from": 6}, {"Unnamed: 0": 36, "sum": 1372158.3474, "date": "2012-08-01", "from": 6}, {"Unnamed: 0": 37, "sum": 2001180.7403, "date": "2012-08-02", "from": 6}, {"Unnamed: 0": 38, "sum": 1770555.1485, "date": "2012-08-03", "from": 6}, {"Unnamed: 0": 39, "sum": 1308881.6602, "date": "2012-08-04", "from": 6}, {"Unnamed: 0": 40, "sum": 3287977.9343, "date": "2012-08-05", "from": 6}, {"Unnamed: 0": 41, "sum": 2410106.5491, "date": "2012-08-06", "from": 6}, {"Unnamed: 0": 42, "sum": 5140124.3804, "date": "2012-08-07", "from": 6}, {"Unnamed: 0": 43, "sum": 1458503.8014, "date": "2012-08-08", "from": 6}, {"Unnamed: 0": 44, "sum": 1434173.5480000002, "date": "2012-08-09", "from": 6}, {"Unnamed: 0": 45, "sum": 1435514.2707, "date": "2012-08-10", "from": 6}, {"Unnamed: 0": 46, "sum": 1573059.561, "date": "2012-08-11", "from": 6}, {"Unnamed: 0": 47, "sum": 2096924.9249, "date": "2012-08-12", "from": 6}, {"Unnamed: 0": 48, "sum": 1456998.793, "date": "2012-08-13", "from": 6}, {"Unnamed: 0": 49, "sum": 1762113.5752, "date": "2012-08-14", "from": 6}, {"Unnamed: 0": 50, "sum": 1658511.6417, "date": "2012-08-15", "from": 6}, {"Unnamed: 0": 51, "sum": 1625478.5489, "date": "2012-08-16", "from": 6}, {"Unnamed: 0": 52, "sum": 1256043.2014, "date": "2012-08-17", "from": 6}, {"Unnamed: 0": 53, "sum": 1733120.5834, "date": "2012-08-18", "from": 6}, {"Unnamed: 0": 54, "sum": 1425683.9911, "date": "2012-08-19", "from": 6}, {"Unnamed: 0": 55, "sum": 1531685.8854, "date": "2012-08-20", "from": 6}, {"Unnamed: 0": 56, "sum": 1746483.5654, "date": "2012-08-21", "from": 6}, {"Unnamed: 0": 57, "sum": 1300069.1476, "date": "2012-08-22", "from": 6}, {"Unnamed: 0": 58, "sum": 1296345.943, "date": "2012-08-23", "from": 6}, {"Unnamed: 0": 59, "sum": 5025483.3125, "date": "2012-08-24", "from": 6}, {"Unnamed: 0": 60, "sum": 2666944.8234, "date": "2012-08-25", "from": 6}, {"Unnamed: 0": 61, "sum": 2023860.5935, "date": "2012-08-26", "from": 6}, {"Unnamed: 0": 62, "sum": 4976964.4985, "date": "2012-08-27", "from": 6}, {"Unnamed: 0": 63, "sum": 1300039.3087, "date": "2012-08-28", "from": 6}, {"Unnamed: 0": 64, "sum": 1513183.2554, "date": "2012-08-29", "from": 6}, {"Unnamed: 0": 65, "sum": 1561219.021, "date": "2012-08-30", "from": 6}, {"Unnamed: 0": 66, "sum": 1910036.6068, "date": "2012-08-31", "from": 6}, {"Unnamed: 0": 67, "sum": 3223191.7809, "date": "2012-09-01", "from": 6}, {"Unnamed: 0": 68, "sum": 2578627.1054, "date": "2012-09-02", "from": 6}, {"Unnamed: 0": 69, "sum": 1325811.9118, "date": "2012-09-03", "from": 6}, {"Unnamed: 0": 70, "sum": 2243836.6669, "date": "2012-09-04", "from": 6}, {"Unnamed: 0": 71, "sum": 2766641.6738, "date": "2012-09-05", "from": 6}, {"Unnamed: 0": 72, "sum": 1766564.3946, "date": "2012-09-06", "from": 6}, {"Unnamed: 0": 73, "sum": 1912168.6565, "date": "2012-09-07", "from": 6}, {"Unnamed: 0": 74, "sum": 1272481.3035, "date": "2012-09-08", "from": 6}, {"Unnamed: 0": 75, "sum": 781640.4297, "date": "2012-09-09", "from": 6}, {"Unnamed: 0": 76, "sum": 762351.9716, "date": "2012-09-13", "from": 6}, {"Unnamed: 0": 77, "sum": 401105.4688, "date": "2012-09-14", "from": 6}, {"Unnamed: 0": 78, "sum": 366939.67, "date": "2012-09-15", "from": 6}, {"Unnamed: 0": 79, "sum": 1842593.2796, "date": "2012-09-16", "from": 6}, {"Unnamed: 0": 80, "sum": 1938877.6344, "date": "2012-09-17", "from": 6}, {"Unnamed: 0": 81, "sum": 2031885.5133, "date": "2012-09-18", "from": 6}, {"Unnamed: 0": 82, "sum": 2087667.0234, "date": "2012-09-19", "from": 6}, {"Unnamed: 0": 83, "sum": 1417591.7745, "date": "2012-09-20", "from": 6}, {"Unnamed: 0": 84, "sum": 1335575.9028, "date": "2012-09-21", "from": 6}, {"Unnamed: 0": 85, "sum": 1643366.6811, "date": "2012-09-22", "from": 6}, {"Unnamed: 0": 86, "sum": 2317448.7843, "date": "2012-09-23", "from": 6}, {"Unnamed: 0": 87, "sum": 2142204.58032, "date": "2012-09-24", "from": 6}, {"Unnamed: 0": 88, "sum": 2362271.9747, "date": "2012-09-25", "from": 6}, {"Unnamed: 0": 89, "sum": 4694184.535, "date": "2012-09-26", "from": 6}, {"Unnamed: 0": 90, "sum": 1301797.5528, "date": "2012-09-27", "from": 6}, {"Unnamed: 0": 91, "sum": 1677600.1961, "date": "2012-09-28", "from": 6}, {"Unnamed: 0": 92, "sum": 1826623.8541, "date": "2012-09-29", "from": 6}, {"Unnamed: 0": 93, "sum": 4235905.9297, "date": "2012-09-30", "from": 6}, {"Unnamed: 0": 94, "sum": 2536919.6234, "date": "2012-10-01", "from": 6}, {"Unnamed: 0": 95, "sum": 3156204.5696, "date": "2012-10-02", "from": 6}, {"Unnamed: 0": 96, "sum": 2699589.2511, "date": "2012-10-03", "from": 6}, {"Unnamed: 0": 97, "sum": 1964007.5998, "date": "2012-10-04", "from": 6}, {"Unnamed: 0": 98, "sum": 1902214.1074, "date": "2012-10-05", "from": 6}, {"Unnamed: 0": 99, "sum": 1909298.2226, "date": "2012-10-06", "from": 6}, {"Unnamed: 0": 100, "sum": 1909551.8304, "date": "2012-10-07", "from": 6}, {"Unnamed: 0": 101, "sum": 2775004.8155, "date": "2012-10-08", "from": 6}, {"Unnamed: 0": 102, "sum": 2752353.5611, "date": "2012-10-09", "from": 6}, {"Unnamed: 0": 103, "sum": 3163967.5622, "date": "2012-10-10", "from": 6}, {"Unnamed: 0": 104, "sum": 2657131.9437, "date": "2012-10-11", "from": 6}, {"Unnamed: 0": 105, "sum": 1889801.9957, "date": "2012-10-12", "from": 6}, {"Unnamed: 0": 106, "sum": 1826961.4414, "date": "2012-10-13", "from": 6}, {"Unnamed: 0": 107, "sum": 2291210.3763, "date": "2012-10-14", "from": 6}, {"Unnamed: 0": 108, "sum": 2276922.8953, "date": "2012-10-15", "from": 6}, {"Unnamed: 0": 109, "sum": 2350551.1239, "date": "2012-10-16", "from": 6}, {"Unnamed: 0": 110, "sum": 2103267.5851, "date": "2012-10-17", "from": 6}, {"Unnamed: 0": 111, "sum": 561822.3467, "date": "2012-10-18", "from": 6}, {"Unnamed: 0": 112, "sum": 1433554.8275, "date": "2012-10-19", "from": 6}, {"Unnamed: 0": 113, "sum": 1931451.9115, "date": "2012-10-20", "from": 6}, {"Unnamed: 0": 114, "sum": 2747812.5938, "date": "2012-10-21", "from": 6}, {"Unnamed: 0": 115, "sum": 2732512.9469, "date": "2012-10-22", "from": 6}, {"Unnamed: 0": 116, "sum": 1937493.6673, "date": "2012-10-23", "from": 6}, {"Unnamed: 0": 117, "sum": 2295570.6458, "date": "2012-10-24", "from": 6}, {"Unnamed: 0": 118, "sum": 2757402.9589, "date": "2012-10-25", "from": 6}, {"Unnamed: 0": 119, "sum": 5258511.4012, "date": "2012-10-26", "from": 6}, {"Unnamed: 0": 120, "sum": 1751994.4226, "date": "2012-10-27", "from": 6}, {"Unnamed: 0": 121, "sum": 4523802.7383, "date": "2012-10-28", "from": 6}, {"Unnamed: 0": 122, "sum": 875454.0308, "date": "2012-10-29", "from": 6}, {"Unnamed: 0": 123, "sum": 803511.3286, "date": "2012-11-07", "from": 6}, {"Unnamed: 0": 124, "sum": 1297194.1488, "date": "2012-11-08", "from": 6}, {"Unnamed: 0": 125, "sum": 1303240.3613, "date": "2012-11-09", "from": 6}, {"Unnamed: 0": 126, "sum": 1576632.7464, "date": "2012-11-10", "from": 6}, {"Unnamed: 0": 127, "sum": 2487398.8417, "date": "2012-11-11", "from": 6}, {"Unnamed: 0": 128, "sum": 1733989.6237, "date": "2012-11-12", "from": 6}, {"Unnamed: 0": 129, "sum": 1928558.7029, "date": "2012-11-13", "from": 6}, {"Unnamed: 0": 130, "sum": 1304723.6685, "date": "2012-11-14", "from": 6}, {"Unnamed: 0": 131, "sum": 1302161.9662, "date": "2012-11-15", "from": 6}, {"Unnamed: 0": 132, "sum": 2468097.4776, "date": "2012-11-16", "from": 6}, {"Unnamed: 0": 133, "sum": 1286165.195, "date": "2012-11-17", "from": 6}, {"Unnamed: 0": 134, "sum": 1813563.2277, "date": "2012-11-18", "from": 6}, {"Unnamed: 0": 135, "sum": 1432315.364, "date": "2012-11-19", "from": 6}, {"Unnamed: 0": 136, "sum": 1488957.3958, "date": "2012-11-20", "from": 6}, {"Unnamed: 0": 137, "sum": 1300665.8652, "date": "2012-11-21", "from": 6}, {"Unnamed: 0": 138, "sum": 2076506.1548, "date": "2012-11-22", "from": 6}, {"Unnamed: 0": 139, "sum": 4362821.2304, "date": "2012-11-23", "from": 6}, {"Unnamed: 0": 140, "sum": 1309731.9891, "date": "2012-11-24", "from": 6}, {"Unnamed: 0": 141, "sum": 2347023.8692, "date": "2012-11-25", "from": 6}, {"Unnamed: 0": 142, "sum": 1983409.8243, "date": "2012-11-26", "from": 6}, {"Unnamed: 0": 143, "sum": 1974172.8994, "date": "2012-11-27", "from": 6}, {"Unnamed: 0": 144, "sum": 1721270.9338, "date": "2012-11-28", "from": 6}, {"Unnamed: 0": 145, "sum": 1814815.8494, "date": "2012-11-29", "from": 6}, {"Unnamed: 0": 146, "sum": 1310373.4599, "date": "2012-11-30", "from": 6}, {"Unnamed: 0": 147, "sum": 2155996.9371, "date": "2012-12-01", "from": 6}, {"Unnamed: 0": 148, "sum": 2242832.6479, "date": "2012-12-02", "from": 6}, {"Unnamed: 0": 149, "sum": 1646450.7358, "date": "2012-12-03", "from": 6}, {"Unnamed: 0": 150, "sum": 1314814.9047, "date": "2012-12-04", "from": 6}, {"Unnamed: 0": 151, "sum": 1296524.9405, "date": "2012-12-05", "from": 6}, {"Unnamed: 0": 152, "sum": 2078409.4719, "date": "2012-12-06", "from": 6}, {"Unnamed: 0": 153, "sum": 1777938.6598, "date": "2012-12-07", "from": 6}, {"Unnamed: 0": 154, "sum": 740787.8575, "date": "2012-12-08", "from": 6}, {"Unnamed: 0": 155, "sum": 2300432.8099, "date": "2013-01-05", "from": 6}, {"Unnamed: 0": 156, "sum": 1750617.0969999998, "date": "2013-01-06", "from": 6}, {"Unnamed: 0": 157, "sum": 4914069.702, "date": "2013-01-07", "from": 6}, {"Unnamed: 0": 158, "sum": 4885134.3297, "date": "2013-01-08", "from": 6}, {"Unnamed: 0": 159, "sum": 4905158.3389, "date": "2013-01-09", "from": 6}, {"Unnamed: 0": 160, "sum": 1832018.7563, "date": "2013-01-10", "from": 6}, {"Unnamed: 0": 161, "sum": 1307347.1899, "date": "2013-01-11", "from": 6}, {"Unnamed: 0": 162, "sum": 1609631.1467, "date": "2013-01-12", "from": 6}, {"Unnamed: 0": 163, "sum": 1721033.8257, "date": "2013-01-13", "from": 6}, {"Unnamed: 0": 164, "sum": 1388321.9147, "date": "2013-01-14", "from": 6}, {"Unnamed: 0": 165, "sum": 1518447.2319, "date": "2013-01-15", "from": 6}, {"Unnamed: 0": 166, "sum": 1287399.1593, "date": "2013-01-16", "from": 6}, {"Unnamed: 0": 167, "sum": 1655669.6246, "date": "2013-01-17", "from": 6}, {"Unnamed: 0": 168, "sum": 1891117.7130000002, "date": "2013-01-18", "from": 6}, {"Unnamed: 0": 169, "sum": 1294383.1019, "date": "2013-01-19", "from": 6}, {"Unnamed: 0": 170, "sum": 2436088.5603, "date": "2013-01-20", "from": 6}, {"Unnamed: 0": 171, "sum": 2103207.3761, "date": "2013-01-21", "from": 6}, {"Unnamed: 0": 172, "sum": 1893256.5803, "date": "2013-01-22", "from": 6}, {"Unnamed: 0": 173, "sum": 1898068.791, "date": "2013-01-23", "from": 6}, {"Unnamed: 0": 174, "sum": 1888237.6157, "date": "2013-01-24", "from": 6}, {"Unnamed: 0": 175, "sum": 3121139.8655, "date": "2013-01-25", "from": 6}, {"Unnamed: 0": 176, "sum": 3717077.9146, "date": "2013-01-26", "from": 6}, {"Unnamed: 0": 177, "sum": 1674199.3744, "date": "2013-01-27", "from": 6}, {"Unnamed: 0": 178, "sum": 1340404.2318, "date": "2013-01-28", "from": 6}, {"Unnamed: 0": 179, "sum": 2124201.7909999997, "date": "2013-01-29", "from": 6}, {"Unnamed: 0": 180, "sum": 1311044.822, "date": "2013-01-30", "from": 6}, {"Unnamed: 0": 181, "sum": 1738037.4137, "date": "2013-01-31", "from": 6}, {"Unnamed: 0": 182, "sum": 805866.74756, "date": "2012-06-27", "from": 5}, {"Unnamed: 0": 183, "sum": 745544.49425, "date": "2012-06-28", "from": 5}, {"Unnamed: 0": 184, "sum": 615442.93355, "date": "2012-06-29", "from": 5}, {"Unnamed: 0": 185, "sum": 1000514.0185100001, "date": "2012-06-30", "from": 5}, {"Unnamed: 0": 186, "sum": 1065357.75102, "date": "2012-07-01", "from": 5}, {"Unnamed: 0": 187, "sum": 961576.60969, "date": "2012-07-02", "from": 5}, {"Unnamed: 0": 188, "sum": 1017572.7777, "date": "2012-07-03", "from": 5}, {"Unnamed: 0": 189, "sum": 923104.7508700001, "date": "2012-07-04", "from": 5}, {"Unnamed: 0": 190, "sum": 1192257.97834, "date": "2012-07-05", "from": 5}, {"Unnamed: 0": 191, "sum": 888322.36201, "date": "2012-07-06", "from": 5}, {"Unnamed: 0": 192, "sum": 882975.12632, "date": "2012-07-07", "from": 5}, {"Unnamed: 0": 193, "sum": 1107722.60689, "date": "2012-07-08", "from": 5}, {"Unnamed: 0": 194, "sum": 1023328.81924, "date": "2012-07-09", "from": 5}, {"Unnamed: 0": 195, "sum": 1322642.9121700001, "date": "2012-07-10", "from": 5}, {"Unnamed: 0": 196, "sum": 2596436.1275299997, "date": "2012-07-11", "from": 5}, {"Unnamed: 0": 197, "sum": 1195575.88799, "date": "2012-07-12", "from": 5}, {"Unnamed: 0": 198, "sum": 1203151.87559, "date": "2012-07-13", "from": 5}, {"Unnamed: 0": 199, "sum": 688459.13862, "date": "2012-07-14", "from": 5}, {"Unnamed: 0": 200, "sum": 1209256.96117, "date": "2012-07-15", "from": 5}, {"Unnamed: 0": 201, "sum": 1157055.5763299998, "date": "2012-07-16", "from": 5}, {"Unnamed: 0": 202, "sum": 1257466.00124, "date": "2012-07-17", "from": 5}, {"Unnamed: 0": 203, "sum": 896669.07466, "date": "2012-07-18", "from": 5}, {"Unnamed: 0": 204, "sum": 1123316.82106, "date": "2012-07-19", "from": 5}, {"Unnamed: 0": 205, "sum": 1213484.61966, "date": "2012-07-20", "from": 5}, {"Unnamed: 0": 206, "sum": 727218.6888100001, "date": "2012-07-21", "from": 5}, {"Unnamed: 0": 207, "sum": 2742324.85861, "date": "2012-07-22", "from": 5}, {"Unnamed: 0": 208, "sum": 1886074.45072, "date": "2012-07-23", "from": 5}, {"Unnamed: 0": 209, "sum": 1753535.67255, "date": "2012-07-24", "from": 5}, {"Unnamed: 0": 210, "sum": 1470978.72453, "date": "2012-07-25", "from": 5}, {"Unnamed: 0": 211, "sum": 2859406.09229, "date": "2012-07-26", "from": 5}, {"Unnamed: 0": 212, "sum": 1959839.2251400002, "date": "2012-07-27", "from": 5}, {"Unnamed: 0": 213, "sum": 1294176.92814, "date": "2012-07-28", "from": 5}, {"Unnamed: 0": 214, "sum": 1770825.53775, "date": "2012-07-29", "from": 5}, {"Unnamed: 0": 215, "sum": 2230476.18997, "date": "2012-07-30", "from": 5}, {"Unnamed: 0": 216, "sum": 2431598.02049, "date": "2012-07-31", "from": 5}, {"Unnamed: 0": 217, "sum": 1007610.8035200001, "date": "2012-08-01", "from": 5}, {"Unnamed: 0": 218, "sum": 2295586.79457, "date": "2012-08-02", "from": 5}, {"Unnamed: 0": 219, "sum": 3308853.42123, "date": "2012-08-03", "from": 5}, {"Unnamed: 0": 220, "sum": 803303.63051, "date": "2012-08-04", "from": 5}, {"Unnamed: 0": 221, "sum": 5328462.855330001, "date": "2012-08-05", "from": 5}, {"Unnamed: 0": 222, "sum": 3857921.10489, "date": "2012-08-06", "from": 5}, {"Unnamed: 0": 223, "sum": 3168919.45896, "date": "2012-08-07", "from": 5}, {"Unnamed: 0": 224, "sum": 3105193.95775, "date": "2012-08-08", "from": 5}, {"Unnamed: 0": 225, "sum": 2687106.40463, "date": "2012-08-09", "from": 5}, {"Unnamed: 0": 226, "sum": 604424.15238, "date": "2012-08-10", "from": 5}, {"Unnamed: 0": 227, "sum": 1482464.93011, "date": "2012-09-04", "from": 5}, {"Unnamed: 0": 228, "sum": 5217497.4628, "date": "2012-09-05", "from": 5}, {"Unnamed: 0": 229, "sum": 2834001.03435, "date": "2012-09-06", "from": 5}, {"Unnamed: 0": 230, "sum": 3100283.97793, "date": "2012-09-07", "from": 5}, {"Unnamed: 0": 231, "sum": 2495753.60802, "date": "2012-09-08", "from": 5}, {"Unnamed: 0": 232, "sum": 2298212.39193, "date": "2012-09-09", "from": 5}, {"Unnamed: 0": 233, "sum": 2258300.61333, "date": "2012-09-10", "from": 5}, {"Unnamed: 0": 234, "sum": 3114789.53318, "date": "2012-09-11", "from": 5}, {"Unnamed: 0": 235, "sum": 898422.8746600001, "date": "2012-09-12", "from": 5}, {"Unnamed: 0": 236, "sum": 876799.4417200001, "date": "2012-09-13", "from": 5}, {"Unnamed: 0": 237, "sum": 318949.30566, "date": "2012-09-14", "from": 5}, {"Unnamed: 0": 238, "sum": 187693.23736, "date": "2012-09-15", "from": 5}, {"Unnamed: 0": 239, "sum": 1088304.47182, "date": "2012-09-16", "from": 5}, {"Unnamed: 0": 240, "sum": 878141.0545, "date": "2012-09-17", "from": 5}, {"Unnamed: 0": 241, "sum": 877175.7662600001, "date": "2012-09-18", "from": 5}, {"Unnamed: 0": 242, "sum": 877698.8118700001, "date": "2012-09-19", "from": 5}, {"Unnamed: 0": 243, "sum": 4598969.4222, "date": "2012-09-20", "from": 5}, {"Unnamed: 0": 244, "sum": 2972986.2475099997, "date": "2012-09-21", "from": 5}, {"Unnamed: 0": 245, "sum": 757064.56757, "date": "2012-09-22", "from": 5}, {"Unnamed: 0": 246, "sum": 2763295.4178299997, "date": "2012-09-23", "from": 5}, {"Unnamed: 0": 247, "sum": 3539326.50223, "date": "2012-09-24", "from": 5}, {"Unnamed: 0": 248, "sum": 2353504.9932, "date": "2012-09-25", "from": 5}, {"Unnamed: 0": 249, "sum": 2514989.2912, "date": "2012-09-26", "from": 5}, {"Unnamed: 0": 250, "sum": 876287.00179, "date": "2012-09-27", "from": 5}, {"Unnamed: 0": 251, "sum": 1319947.82876, "date": "2012-09-28", "from": 5}, {"Unnamed: 0": 252, "sum": 5225763.675480001, "date": "2012-09-29", "from": 5}, {"Unnamed: 0": 253, "sum": 5014677.96507, "date": "2012-09-30", "from": 5}, {"Unnamed: 0": 254, "sum": 1909499.9687700002, "date": "2012-10-01", "from": 5}, {"Unnamed: 0": 255, "sum": 1879388.29947, "date": "2012-10-02", "from": 5}, {"Unnamed: 0": 256, "sum": 1333108.13294, "date": "2012-10-03", "from": 5}, {"Unnamed: 0": 257, "sum": 1502557.68773, "date": "2012-10-04", "from": 5}, {"Unnamed: 0": 258, "sum": 2596775.9947200003, "date": "2012-10-05", "from": 5}, {"Unnamed: 0": 259, "sum": 3631901.8101800005, "date": "2012-10-06", "from": 5}, {"Unnamed: 0": 260, "sum": 577693.33692, "date": "2012-10-07", "from": 5}, {"Unnamed: 0": 261, "sum": 3179059.0378, "date": "2012-10-08", "from": 5}, {"Unnamed: 0": 262, "sum": 3092029.32705, "date": "2012-10-09", "from": 5}, {"Unnamed: 0": 263, "sum": 2354990.76993, "date": "2012-10-10", "from": 5}, {"Unnamed: 0": 264, "sum": 4234146.708880001, "date": "2012-10-11", "from": 5}, {"Unnamed: 0": 265, "sum": 938609.10784, "date": "2012-10-12", "from": 5}, {"Unnamed: 0": 266, "sum": 870286.81118, "date": "2012-10-13", "from": 5}, {"Unnamed: 0": 267, "sum": 1505666.8856600001, "date": "2012-10-14", "from": 5}, {"Unnamed: 0": 268, "sum": 167150.56275, "date": "2012-10-15", "from": 5}, {"Unnamed: 0": 269, "sum": 2837510.44397, "date": "2012-10-17", "from": 5}, {"Unnamed: 0": 270, "sum": 1159902.3279, "date": "2012-10-18", "from": 5}, {"Unnamed: 0": 271, "sum": 893522.0179799999, "date": "2012-10-19", "from": 5}, {"Unnamed: 0": 272, "sum": 3019219.3001200003, "date": "2012-10-20", "from": 5}, {"Unnamed: 0": 273, "sum": 2832982.70097, "date": "2012-10-21", "from": 5}, {"Unnamed: 0": 274, "sum": 730705.28505, "date": "2012-10-22", "from": 5}, {"Unnamed: 0": 275, "sum": 2894888.41902, "date": "2012-10-23", "from": 5}, {"Unnamed: 0": 276, "sum": 3407452.7491599997, "date": "2012-10-24", "from": 5}, {"Unnamed: 0": 277, "sum": 3404390.4037900004, "date": "2012-10-25", "from": 5}, {"Unnamed: 0": 278, "sum": 391592.1288, "date": "2012-10-26", "from": 5}, {"Unnamed: 0": 279, "sum": 2450469.1965799998, "date": "2012-10-27", "from": 5}, {"Unnamed: 0": 280, "sum": 4613695.69051, "date": "2012-10-28", "from": 5}, {"Unnamed: 0": 281, "sum": 4053184.25239, "date": "2012-10-29", "from": 5}, {"Unnamed: 0": 282, "sum": 2835885.1866, "date": "2012-10-30", "from": 5}, {"Unnamed: 0": 283, "sum": 3274448.29777, "date": "2012-10-31", "from": 5}, {"Unnamed: 0": 284, "sum": 2708135.49706, "date": "2012-11-01", "from": 5}, {"Unnamed: 0": 285, "sum": 3955339.64191, "date": "2012-11-02", "from": 5}, {"Unnamed: 0": 286, "sum": 1155632.56342, "date": "2012-11-03", "from": 5}, {"Unnamed: 0": 287, "sum": 2459762.5563, "date": "2012-11-04", "from": 5}, {"Unnamed: 0": 288, "sum": 3090140.34682, "date": "2012-11-05", "from": 5}, {"Unnamed: 0": 289, "sum": 3110278.47661, "date": "2012-11-06", "from": 5}, {"Unnamed: 0": 290, "sum": 1530653.61739, "date": "2012-11-07", "from": 5}, {"Unnamed: 0": 291, "sum": 2818517.20547, "date": "2012-11-08", "from": 5}, {"Unnamed: 0": 292, "sum": 3475100.0374300005, "date": "2012-11-09", "from": 5}, {"Unnamed: 0": 293, "sum": 6685220.59674, "date": "2012-11-10", "from": 5}, {"Unnamed: 0": 294, "sum": 3197455.14765, "date": "2012-11-11", "from": 5}, {"Unnamed: 0": 295, "sum": 3085587.92081, "date": "2012-11-12", "from": 5}, {"Unnamed: 0": 296, "sum": 273954.84450999997, "date": "2012-11-13", "from": 5}, {"Unnamed: 0": 297, "sum": 2647539.12295, "date": "2012-11-14", "from": 5}, {"Unnamed: 0": 298, "sum": 632466.58262, "date": "2012-11-15", "from": 5}, {"Unnamed: 0": 299, "sum": 2704201.64316, "date": "2012-11-16", "from": 5}, {"Unnamed: 0": 300, "sum": 4045714.91876, "date": "2012-11-17", "from": 5}, {"Unnamed: 0": 301, "sum": 2318066.3333400004, "date": "2012-11-18", "from": 5}, {"Unnamed: 0": 302, "sum": 159353.79465999999, "date": "2012-11-19", "from": 5}, {"Unnamed: 0": 303, "sum": 3220903.65912, "date": "2012-11-20", "from": 5}, {"Unnamed: 0": 304, "sum": 169329.38945, "date": "2012-11-21", "from": 5}, {"Unnamed: 0": 305, "sum": 0.0, "date": "2012-11-22", "from": 5}, {"Unnamed: 0": 306, "sum": 398.76658, "date": "2012-11-23", "from": 5}, {"Unnamed: 0": 307, "sum": 0.0, "date": "2012-11-24", "from": 5}, {"Unnamed: 0": 308, "sum": 404093.05159, "date": "2012-11-25", "from": 5}, {"Unnamed: 0": 309, "sum": 2186117.10231, "date": "2012-11-26", "from": 5}, {"Unnamed: 0": 310, "sum": 87344.24325, "date": "2012-11-27", "from": 5}, {"Unnamed: 0": 311, "sum": 2505832.12625, "date": "2012-11-29", "from": 5}, {"Unnamed: 0": 312, "sum": 1657010.73734, "date": "2012-11-30", "from": 5}, {"Unnamed: 0": 313, "sum": 4500190.26164, "date": "2012-12-01", "from": 5}, {"Unnamed: 0": 314, "sum": 2965308.77039, "date": "2012-12-02", "from": 5}, {"Unnamed: 0": 315, "sum": 2200137.4945900002, "date": "2012-12-03", "from": 5}, {"Unnamed: 0": 316, "sum": 535055.6450100001, "date": "2012-12-04", "from": 5}, {"Unnamed: 0": 317, "sum": 1691338.31676, "date": "2012-12-05", "from": 5}, {"Unnamed: 0": 318, "sum": 2292471.12674, "date": "2012-12-06", "from": 5}, {"Unnamed: 0": 319, "sum": 3260724.05357, "date": "2012-12-07", "from": 5}, {"Unnamed: 0": 320, "sum": 2652868.28884, "date": "2012-12-08", "from": 5}, {"Unnamed: 0": 321, "sum": 2818809.19656, "date": "2012-12-09", "from": 5}, {"Unnamed: 0": 322, "sum": 2714991.8429, "date": "2012-12-10", "from": 5}, {"Unnamed: 0": 323, "sum": 2228720.28848, "date": "2012-12-11", "from": 5}, {"Unnamed: 0": 324, "sum": 1019019.4964700001, "date": "2012-12-12", "from": 5}, {"Unnamed: 0": 325, "sum": 416540.59596, "date": "2012-12-13", "from": 5}, {"Unnamed: 0": 326, "sum": 551193.6412899999, "date": "2012-12-14", "from": 5}, {"Unnamed: 0": 327, "sum": 893924.5608200001, "date": "2012-12-15", "from": 5}, {"Unnamed: 0": 328, "sum": 4766233.59233, "date": "2012-12-16", "from": 5}, {"Unnamed: 0": 329, "sum": 849668.28342, "date": "2012-12-17", "from": 5}, {"Unnamed: 0": 330, "sum": 1839350.8875099998, "date": "2012-12-18", "from": 5}, {"Unnamed: 0": 331, "sum": 3079203.90888, "date": "2012-12-19", "from": 5}, {"Unnamed: 0": 332, "sum": 195930.01133, "date": "2012-12-20", "from": 5}, {"Unnamed: 0": 333, "sum": 2644903.58811, "date": "2012-12-22", "from": 5}, {"Unnamed: 0": 334, "sum": 515643.18536999996, "date": "2012-12-23", "from": 5}, {"Unnamed: 0": 335, "sum": 171582.79014, "date": "2012-12-24", "from": 5}, {"Unnamed: 0": 336, "sum": 2597787.3147400003, "date": "2012-12-25", "from": 5}, {"Unnamed: 0": 337, "sum": 4719329.11166, "date": "2012-12-26", "from": 5}, {"Unnamed: 0": 338, "sum": 3457409.41852, "date": "2012-12-27", "from": 5}, {"Unnamed: 0": 339, "sum": 778436.02142, "date": "2012-12-28", "from": 5}, {"Unnamed: 0": 340, "sum": 1174788.9048799998, "date": "2012-12-29", "from": 5}, {"Unnamed: 0": 341, "sum": 2909985.8390599997, "date": "2012-12-30", "from": 5}, {"Unnamed: 0": 342, "sum": 192825.64654000002, "date": "2012-12-31", "from": 5}, {"Unnamed: 0": 343, "sum": 4746572.55406, "date": "2013-01-01", "from": 5}, {"Unnamed: 0": 344, "sum": 4373358.60601, "date": "2013-01-02", "from": 5}, {"Unnamed: 0": 345, "sum": 1867174.5660700002, "date": "2013-01-03", "from": 5}, {"Unnamed: 0": 346, "sum": 4801643.18336, "date": "2013-01-04", "from": 5}, {"Unnamed: 0": 347, "sum": 2354685.9967799997, "date": "2013-01-05", "from": 5}, {"Unnamed: 0": 348, "sum": 2786075.00206, "date": "2013-01-06", "from": 5}, {"Unnamed: 0": 349, "sum": 800877.1717300001, "date": "2013-01-07", "from": 5}, {"Unnamed: 0": 350, "sum": 4388286.38628, "date": "2013-01-08", "from": 5}, {"Unnamed: 0": 351, "sum": 4379081.97175, "date": "2013-01-09", "from": 5}, {"Unnamed: 0": 352, "sum": 1195324.13083, "date": "2013-01-10", "from": 5}, {"Unnamed: 0": 353, "sum": 1215749.20261, "date": "2013-01-11", "from": 5}, {"Unnamed: 0": 354, "sum": 1091074.70539, "date": "2013-01-12", "from": 5}, {"Unnamed: 0": 355, "sum": 1301852.7296, "date": "2013-01-13", "from": 5}, {"Unnamed: 0": 356, "sum": 2329313.2631, "date": "2013-01-14", "from": 5}, {"Unnamed: 0": 357, "sum": 3422883.93053, "date": "2013-01-15", "from": 5}, {"Unnamed: 0": 358, "sum": 3840571.7251800005, "date": "2013-01-16", "from": 5}, {"Unnamed: 0": 359, "sum": 3183483.01181, "date": "2013-01-17", "from": 5}, {"Unnamed: 0": 360, "sum": 1727115.01227, "date": "2013-01-18", "from": 5}, {"Unnamed: 0": 361, "sum": 5667925.383280001, "date": "2013-01-19", "from": 5}, {"Unnamed: 0": 362, "sum": 4383665.1808400005, "date": "2013-01-20", "from": 5}, {"Unnamed: 0": 363, "sum": 3676283.6971400003, "date": "2013-01-21", "from": 5}, {"Unnamed: 0": 364, "sum": 2942466.0604, "date": "2013-01-22", "from": 5}, {"Unnamed: 0": 365, "sum": 2698166.1834, "date": "2013-01-23", "from": 5}, {"Unnamed: 0": 366, "sum": 410474.50793, "date": "2013-01-24", "from": 5}, {"Unnamed: 0": 367, "sum": 2592405.6238, "date": "2013-01-25", "from": 5}, {"Unnamed: 0": 368, "sum": 1378243.52912, "date": "2013-01-26", "from": 5}, {"Unnamed: 0": 369, "sum": 3855363.92195, "date": "2013-01-27", "from": 5}, {"Unnamed: 0": 370, "sum": 173788.3222, "date": "2013-01-28", "from": 5}, {"Unnamed: 0": 371, "sum": 3767600.89822, "date": "2013-01-29", "from": 5}, {"Unnamed: 0": 372, "sum": 3863761.17004, "date": "2013-01-30", "from": 5}, {"Unnamed: 0": 373, "sum": 2327469.95205, "date": "2013-01-31", "from": 5}, {"Unnamed: 0": 374, "sum": 2234362.00378, "date": "2012-06-27", "from": 4}, {"Unnamed: 0": 375, "sum": 1920332.70942, "date": "2012-06-28", "from": 4}, {"Unnamed: 0": 376, "sum": 1163869.9529799998, "date": "2012-06-29", "from": 4}, {"Unnamed: 0": 377, "sum": 1712618.10956, "date": "2012-06-30", "from": 4}, {"Unnamed: 0": 378, "sum": 2745298.05876, "date": "2012-07-01", "from": 4}, {"Unnamed: 0": 379, "sum": 3909450.9112400003, "date": "2012-07-02", "from": 4}, {"Unnamed: 0": 380, "sum": 3084469.71206, "date": "2012-07-03", "from": 4}, {"Unnamed: 0": 381, "sum": 3946749.3753199996, "date": "2012-07-04", "from": 4}, {"Unnamed: 0": 382, "sum": 2036916.91478, "date": "2012-07-05", "from": 4}, {"Unnamed: 0": 383, "sum": 4350014.91048, "date": "2012-07-06", "from": 4}, {"Unnamed: 0": 384, "sum": 1876438.18108, "date": "2012-07-07", "from": 4}, {"Unnamed: 0": 385, "sum": 3333127.2749799998, "date": "2012-07-08", "from": 4}, {"Unnamed: 0": 386, "sum": 2876267.7373, "date": "2012-07-09", "from": 4}, {"Unnamed: 0": 387, "sum": 2127013.92506, "date": "2012-07-10", "from": 4}, {"Unnamed: 0": 388, "sum": 1718391.9025400002, "date": "2012-07-11", "from": 4}, {"Unnamed: 0": 389, "sum": 3748496.05266, "date": "2012-07-12", "from": 4}, {"Unnamed: 0": 390, "sum": 1878649.7990400002, "date": "2012-07-13", "from": 4}, {"Unnamed: 0": 391, "sum": 583046.2578, "date": "2012-07-14", "from": 4}, {"Unnamed: 0": 392, "sum": 2308776.1035599997, "date": "2012-07-23", "from": 4}, {"Unnamed: 0": 393, "sum": 2182488.42154, "date": "2012-07-24", "from": 4}, {"Unnamed: 0": 394, "sum": 1243451.7600399998, "date": "2012-07-25", "from": 4}, {"Unnamed: 0": 395, "sum": 931285.8129600009, "date": "2012-07-26", "from": 4}, {"Unnamed: 0": 396, "sum": 915298.8773400009, "date": "2012-07-27", "from": 4}, {"Unnamed: 0": 397, "sum": 1607654.7375, "date": "2012-07-28", "from": 4}, {"Unnamed: 0": 398, "sum": 3146653.3794, "date": "2012-07-29", "from": 4}, {"Unnamed: 0": 399, "sum": 2166929.3116, "date": "2012-07-30", "from": 4}, {"Unnamed: 0": 400, "sum": 3930878.34634, "date": "2012-07-31", "from": 4}, {"Unnamed: 0": 401, "sum": 1868432.3479799998, "date": "2012-08-01", "from": 4}, {"Unnamed: 0": 402, "sum": 2015856.2481200001, "date": "2012-08-02", "from": 4}, {"Unnamed: 0": 403, "sum": 3250430.52752, "date": "2012-08-03", "from": 4}, {"Unnamed: 0": 404, "sum": 2355885.0871200003, "date": "2012-08-04", "from": 4}, {"Unnamed: 0": 405, "sum": 1567086.6164, "date": "2012-08-05", "from": 4}, {"Unnamed: 0": 406, "sum": 2400764.8336400003, "date": "2012-08-06", "from": 4}, {"Unnamed: 0": 407, "sum": 2160222.4928599996, "date": "2012-08-07", "from": 4}, {"Unnamed: 0": 408, "sum": 2034550.5902, "date": "2012-08-08", "from": 4}, {"Unnamed: 0": 409, "sum": 2046986.333, "date": "2012-08-09", "from": 4}, {"Unnamed: 0": 410, "sum": 2949254.24212, "date": "2012-08-10", "from": 4}, {"Unnamed: 0": 411, "sum": 1369106.4837200001, "date": "2012-08-11", "from": 4}, {"Unnamed: 0": 412, "sum": 1370826.64358, "date": "2012-08-12", "from": 4}, {"Unnamed: 0": 413, "sum": 1276473.05134, "date": "2012-08-13", "from": 4}, {"Unnamed: 0": 414, "sum": 3108218.38374, "date": "2012-08-14", "from": 4}, {"Unnamed: 0": 415, "sum": 3027081.90332, "date": "2012-08-15", "from": 4}, {"Unnamed: 0": 416, "sum": 3359846.4818, "date": "2012-08-16", "from": 4}, {"Unnamed: 0": 417, "sum": 1944743.5575400002, "date": "2012-08-17", "from": 4}, {"Unnamed: 0": 418, "sum": 1500078.5569999998, "date": "2012-08-18", "from": 4}, {"Unnamed: 0": 419, "sum": 1499650.3573, "date": "2012-08-19", "from": 4}, {"Unnamed: 0": 420, "sum": 2990445.9622, "date": "2012-08-20", "from": 4}, {"Unnamed: 0": 421, "sum": 4281624.982480001, "date": "2012-08-21", "from": 4}, {"Unnamed: 0": 422, "sum": 1804085.30484, "date": "2012-08-22", "from": 4}, {"Unnamed: 0": 423, "sum": 3066786.81242, "date": "2012-08-23", "from": 4}, {"Unnamed: 0": 424, "sum": 2270866.3758799997, "date": "2012-08-24", "from": 4}, {"Unnamed: 0": 425, "sum": 2548702.2903, "date": "2012-08-25", "from": 4}, {"Unnamed: 0": 426, "sum": 2001863.6868, "date": "2012-08-26", "from": 4}, {"Unnamed: 0": 427, "sum": 3752452.80174, "date": "2012-08-27", "from": 4}, {"Unnamed: 0": 428, "sum": 2737822.53736, "date": "2012-08-28", "from": 4}, {"Unnamed: 0": 429, "sum": 2998353.5588, "date": "2012-08-29", "from": 4}, {"Unnamed: 0": 430, "sum": 2929882.4004, "date": "2012-08-30", "from": 4}, {"Unnamed: 0": 431, "sum": 1449079.19914, "date": "2012-08-31", "from": 4}, {"Unnamed: 0": 432, "sum": 3857315.88642, "date": "2012-09-01", "from": 4}, {"Unnamed: 0": 433, "sum": 2747333.93498, "date": "2012-09-02", "from": 4}, {"Unnamed: 0": 434, "sum": 4219138.07748, "date": "2012-09-03", "from": 4}, {"Unnamed: 0": 435, "sum": 3468665.2622599998, "date": "2012-09-04", "from": 4}, {"Unnamed: 0": 436, "sum": 435353.79643999995, "date": "2012-09-05", "from": 4}, {"Unnamed: 0": 437, "sum": 2111913.399, "date": "2012-09-11", "from": 4}, {"Unnamed: 0": 438, "sum": 4586881.37232, "date": "2012-09-12", "from": 4}, {"Unnamed: 0": 439, "sum": 4110746.40106, "date": "2012-09-13", "from": 4}, {"Unnamed: 0": 440, "sum": 664413.78948, "date": "2012-09-14", "from": 4}, {"Unnamed: 0": 441, "sum": 1645831.4727399999, "date": "2012-09-15", "from": 4}, {"Unnamed: 0": 442, "sum": 2963149.0622799997, "date": "2012-09-16", "from": 4}, {"Unnamed: 0": 443, "sum": 4241582.70756, "date": "2012-09-17", "from": 4}, {"Unnamed: 0": 444, "sum": 2570838.61282, "date": "2012-09-18", "from": 4}, {"Unnamed: 0": 445, "sum": 4417804.18784, "date": "2012-09-19", "from": 4}, {"Unnamed: 0": 446, "sum": 3093297.1149, "date": "2012-09-20", "from": 4}, {"Unnamed: 0": 447, "sum": 3201325.2430000002, "date": "2012-09-21", "from": 4}, {"Unnamed: 0": 448, "sum": 2681771.96858, "date": "2012-09-22", "from": 4}, {"Unnamed: 0": 449, "sum": 3403683.3344799997, "date": "2012-09-23", "from": 4}, {"Unnamed: 0": 450, "sum": 2932263.9619400003, "date": "2012-09-24", "from": 4}, {"Unnamed: 0": 451, "sum": 4219856.58516, "date": "2012-09-25", "from": 4}, {"Unnamed: 0": 452, "sum": 4745971.82286, "date": "2012-09-26", "from": 4}, {"Unnamed: 0": 453, "sum": 3394419.97626, "date": "2012-09-27", "from": 4}, {"Unnamed: 0": 454, "sum": 3239059.7009799997, "date": "2012-09-28", "from": 4}, {"Unnamed: 0": 455, "sum": 2909763.965, "date": "2012-09-29", "from": 4}, {"Unnamed: 0": 456, "sum": 2778831.84586, "date": "2012-09-30", "from": 4}, {"Unnamed: 0": 457, "sum": 1243410.66974, "date": "2012-10-01", "from": 4}, {"Unnamed: 0": 458, "sum": 937540.7599200009, "date": "2012-10-02", "from": 4}, {"Unnamed: 0": 459, "sum": 942480.609760001, "date": "2012-10-03", "from": 4}, {"Unnamed: 0": 460, "sum": 1918007.89862, "date": "2012-10-04", "from": 4}, {"Unnamed: 0": 461, "sum": 2990472.37946, "date": "2012-10-05", "from": 4}, {"Unnamed: 0": 462, "sum": 3267990.63222, "date": "2012-10-06", "from": 4}, {"Unnamed: 0": 463, "sum": 3089181.96936, "date": "2012-10-07", "from": 4}, {"Unnamed: 0": 464, "sum": 3026325.0236, "date": "2012-10-08", "from": 4}, {"Unnamed: 0": 465, "sum": 3528278.6699800002, "date": "2012-10-09", "from": 4}, {"Unnamed: 0": 466, "sum": 2841965.8032, "date": "2012-10-10", "from": 4}, {"Unnamed: 0": 467, "sum": 2326264.9563599997, "date": "2012-10-11", "from": 4}, {"Unnamed: 0": 468, "sum": 2869112.2917, "date": "2012-10-12", "from": 4}, {"Unnamed: 0": 469, "sum": 2915238.0809400002, "date": "2012-10-13", "from": 4}, {"Unnamed: 0": 470, "sum": 2932637.76544, "date": "2012-10-14", "from": 4}, {"Unnamed: 0": 471, "sum": 3196601.83296, "date": "2012-10-15", "from": 4}, {"Unnamed: 0": 472, "sum": 3186473.99352, "date": "2012-10-16", "from": 4}, {"Unnamed: 0": 473, "sum": 2865963.7351599997, "date": "2012-10-17", "from": 4}, {"Unnamed: 0": 474, "sum": 3583332.35846, "date": "2012-10-18", "from": 4}, {"Unnamed: 0": 475, "sum": 4712355.09526, "date": "2012-10-19", "from": 4}, {"Unnamed: 0": 476, "sum": 3176526.81514, "date": "2012-10-20", "from": 4}, {"Unnamed: 0": 477, "sum": 4766408.2877, "date": "2012-10-21", "from": 4}, {"Unnamed: 0": 478, "sum": 4156964.29536, "date": "2012-10-22", "from": 4}, {"Unnamed: 0": 479, "sum": 3297086.37772, "date": "2012-10-23", "from": 4}, {"Unnamed: 0": 480, "sum": 3974327.44262, "date": "2012-10-24", "from": 4}, {"Unnamed: 0": 481, "sum": 375220.01198, "date": "2012-10-25", "from": 4}, {"Unnamed: 0": 482, "sum": 1889932.15, "date": "2012-11-07", "from": 4}, {"Unnamed: 0": 483, "sum": 3401688.49608, "date": "2012-11-08", "from": 4}, {"Unnamed: 0": 484, "sum": 4003420.37046, "date": "2012-11-09", "from": 4}, {"Unnamed: 0": 485, "sum": 4748553.4599, "date": "2012-11-10", "from": 4}, {"Unnamed: 0": 486, "sum": 4250460.0681, "date": "2012-11-11", "from": 4}, {"Unnamed: 0": 487, "sum": 3870035.4943800005, "date": "2012-11-12", "from": 4}, {"Unnamed: 0": 488, "sum": 2671576.03052, "date": "2012-11-13", "from": 4}, {"Unnamed: 0": 489, "sum": 3039969.60156, "date": "2012-11-14", "from": 4}, {"Unnamed: 0": 490, "sum": 3463788.4172199997, "date": "2012-11-15", "from": 4}, {"Unnamed: 0": 491, "sum": 3736258.2560400004, "date": "2012-11-16", "from": 4}, {"Unnamed: 0": 492, "sum": 3558258.2500400003, "date": "2012-11-17", "from": 4}, {"Unnamed: 0": 493, "sum": 2825899.3673400003, "date": "2012-11-18", "from": 4}, {"Unnamed: 0": 494, "sum": 4224883.1235, "date": "2012-11-19", "from": 4}, {"Unnamed: 0": 495, "sum": 3241575.22872, "date": "2012-11-20", "from": 4}, {"Unnamed: 0": 496, "sum": 1082994.8568, "date": "2012-11-21", "from": 4}, {"Unnamed: 0": 497, "sum": 3016275.3528400003, "date": "2012-11-22", "from": 4}, {"Unnamed: 0": 498, "sum": 3677006.13996, "date": "2012-11-23", "from": 4}, {"Unnamed: 0": 499, "sum": 2830517.89108, "date": "2012-11-24", "from": 4}, {"Unnamed: 0": 500, "sum": 2953906.35744, "date": "2012-11-25", "from": 4}, {"Unnamed: 0": 501, "sum": 3178355.00713, "date": "2012-11-26", "from": 4}, {"Unnamed: 0": 502, "sum": 3499235.2106, "date": "2012-11-27", "from": 4}, {"Unnamed: 0": 503, "sum": 3478249.6526, "date": "2012-11-28", "from": 4}, {"Unnamed: 0": 504, "sum": 2725742.6452, "date": "2012-11-29", "from": 4}, {"Unnamed: 0": 505, "sum": 3937990.33794, "date": "2012-11-30", "from": 4}, {"Unnamed: 0": 506, "sum": 3488470.84666, "date": "2012-12-01", "from": 4}, {"Unnamed: 0": 507, "sum": 2611651.6397599997, "date": "2012-12-02", "from": 4}, {"Unnamed: 0": 508, "sum": 3324993.33146, "date": "2012-12-03", "from": 4}, {"Unnamed: 0": 509, "sum": 2749571.8037400004, "date": "2012-12-04", "from": 4}, {"Unnamed: 0": 510, "sum": 3893592.08414, "date": "2012-12-05", "from": 4}, {"Unnamed: 0": 511, "sum": 3477198.5501800003, "date": "2012-12-06", "from": 4}, {"Unnamed: 0": 512, "sum": 3446088.55826, "date": "2012-12-07", "from": 4}, {"Unnamed: 0": 513, "sum": 3106592.7247599997, "date": "2012-12-08", "from": 4}, {"Unnamed: 0": 514, "sum": 3318783.0677400003, "date": "2012-12-09", "from": 4}, {"Unnamed: 0": 515, "sum": 4073659.5111800004, "date": "2012-12-10", "from": 4}, {"Unnamed: 0": 516, "sum": 3488480.21448, "date": "2012-12-11", "from": 4}, {"Unnamed: 0": 517, "sum": 3124243.0424200003, "date": "2012-12-12", "from": 4}, {"Unnamed: 0": 518, "sum": 2323628.1072400003, "date": "2012-12-13", "from": 4}, {"Unnamed: 0": 519, "sum": 2121320.32884, "date": "2012-12-14", "from": 4}, {"Unnamed: 0": 520, "sum": 2965811.4692599997, "date": "2012-12-15", "from": 4}, {"Unnamed: 0": 521, "sum": 3801297.8766199998, "date": "2012-12-16", "from": 4}, {"Unnamed: 0": 522, "sum": 2365824.9064599997, "date": "2012-12-17", "from": 4}, {"Unnamed: 0": 523, "sum": 2373404.33092, "date": "2012-12-18", "from": 4}, {"Unnamed: 0": 524, "sum": 3696633.32904, "date": "2012-12-19", "from": 4}, {"Unnamed: 0": 525, "sum": 3483911.89704, "date": "2012-12-20", "from": 4}, {"Unnamed: 0": 526, "sum": 2895991.37054, "date": "2012-12-21", "from": 4}, {"Unnamed: 0": 527, "sum": 2333346.01373, "date": "2012-12-22", "from": 4}, {"Unnamed: 0": 528, "sum": 3467852.4463, "date": "2012-12-23", "from": 4}, {"Unnamed: 0": 529, "sum": 2360213.3331, "date": "2012-12-24", "from": 4}, {"Unnamed: 0": 530, "sum": 4078117.39326, "date": "2012-12-25", "from": 4}, {"Unnamed: 0": 531, "sum": 2588503.5111, "date": "2012-12-26", "from": 4}, {"Unnamed: 0": 532, "sum": 1835076.83438, "date": "2012-12-27", "from": 4}, {"Unnamed: 0": 533, "sum": 2660284.28108, "date": "2012-12-28", "from": 4}, {"Unnamed: 0": 534, "sum": 3356733.00464, "date": "2012-12-29", "from": 4}, {"Unnamed: 0": 535, "sum": 2444876.4511, "date": "2012-12-30", "from": 4}, {"Unnamed: 0": 536, "sum": 3088689.79944, "date": "2012-12-31", "from": 4}, {"Unnamed: 0": 537, "sum": 4321160.13473, "date": "2013-01-01", "from": 4}, {"Unnamed: 0": 538, "sum": 3133107.2098, "date": "2013-01-02", "from": 4}, {"Unnamed: 0": 539, "sum": 2056631.5328, "date": "2013-01-03", "from": 4}, {"Unnamed: 0": 540, "sum": 363934.15579, "date": "2013-01-04", "from": 4}, {"Unnamed: 0": 541, "sum": 106916.61702, "date": "2013-01-05", "from": 4}, {"Unnamed: 0": 542, "sum": 93650.2287, "date": "2013-01-06", "from": 4}, {"Unnamed: 0": 543, "sum": 1508692.8633700002, "date": "2013-01-07", "from": 4}, {"Unnamed: 0": 544, "sum": 330916.20696, "date": "2013-01-08", "from": 4}, {"Unnamed: 0": 545, "sum": 77615.7402, "date": "2013-01-09", "from": 4}, {"Unnamed: 0": 546, "sum": 29905.1435, "date": "2013-01-10", "from": 4}, {"Unnamed: 0": 547, "sum": 812031.3606, "date": "2013-01-11", "from": 4}, {"Unnamed: 0": 548, "sum": 2242386.3956299997, "date": "2013-01-12", "from": 4}, {"Unnamed: 0": 549, "sum": 2381963.59034, "date": "2013-01-13", "from": 4}, {"Unnamed: 0": 550, "sum": 1951546.6071799998, "date": "2013-01-14", "from": 4}, {"Unnamed: 0": 551, "sum": 1723164.9707, "date": "2013-01-15", "from": 4}, {"Unnamed: 0": 552, "sum": 2896142.5311, "date": "2013-01-16", "from": 4}, {"Unnamed: 0": 553, "sum": 3053908.96882, "date": "2013-01-17", "from": 4}, {"Unnamed: 0": 554, "sum": 2772635.4308, "date": "2013-01-18", "from": 4}, {"Unnamed: 0": 555, "sum": 3614650.1458699997, "date": "2013-01-19", "from": 4}, {"Unnamed: 0": 556, "sum": 2478258.32052, "date": "2013-01-20", "from": 4}, {"Unnamed: 0": 557, "sum": 3003973.5026, "date": "2013-01-21", "from": 4}, {"Unnamed: 0": 558, "sum": 2343807.10092, "date": "2013-01-22", "from": 4}, {"Unnamed: 0": 559, "sum": 2117573.09547, "date": "2013-01-23", "from": 4}]}};
+      var embedOpt = {"mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
+<p>Obviously, from the graph, we noticed that on 2012-11-10, No.5 household reached the max entertainment expenditure electronically. Pretending to a detective, you can guess why this family used so much on that specific day. Were there any visitors coming? Were there any celebrations? Was it a festival? Obviously, there must be something special happening on that specific date.</p>
+<p>In this graph, I extracted the entertainment expenditure from each family through a long period of time, and create 3 dataframes to record them separately. Then I joined all of them to check which family has ever reached the max expenditure by creating a new dataframe. Next, I use date as x-axis and summation of entertain expenditures as y-axis. Then I categorize each point by the family where it came from through colors and the usage of electricity on entertainment by different sizes. As a result, you can directly notice the date and usage.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

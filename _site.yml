@@ -1,0 +1,8 @@
+name: "my-website"
+navbar:
+  title: "My Website"
+  left:
+    - text: "1st Vis"
+      href: index.html
+    - text: "2nd Vis"
+      href: about.html

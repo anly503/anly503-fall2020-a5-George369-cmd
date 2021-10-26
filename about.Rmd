@@ -1,0 +1,21 @@
+---
+title: "Altair"
+---
+## Question:
+#### Among all 3 households, which family has ever reached the most entertainment expenditure?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(htmltools)
+includeHTML("altair.html")
+```
+
+
+Obviously, from the graph, we noticed that on 2012-11-10, No.5 household reached the max entertainment expenditure electronically.
+Pretending to a detective, you can guess why this family used so much on that specific day. Were there any visitors coming? Were there
+any celebrations? Was it a festival? Obviously, there must be something special happening on that specific date.
+
+
+In this graph, I extracted the entertainment expenditure from each family through a long period of time, and create 3 dataframes to record them
+separately. Then I joined all of them to check which family has ever reached the max expenditure by creating a new dataframe. Next, I
+use date as x-axis and summation of entertain expenditures as y-axis. Then I categorize each point by the family where it came from through colors
+and the usage of electricity on entertainment by different sizes. As a result, you can directly notice the date and usage.
