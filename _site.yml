@@ -6,3 +6,5 @@ navbar:
       href: index.html
     - text: "Altair"
       href: about.html
+    - text: "Plotly"
+      href: 123.html
