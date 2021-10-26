@@ -1,13 +1,26 @@
 ---
 title: "Plotly"
+output:
+  html_document:
+    self_contained: false
 ---
 ## Question:
 ### Which application generally costs the most energy in a normal household?
 
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(htmltools)
-includeHTML("sums.html")
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(htmlwidgets)
+library(ggplot2)
+library(plotly)
+sums <- read.csv("sums.csv")
+fig <- plot_ly(sums, x = ~date, y = ~sum,
+               color = ~category,
+               type='scatter', mode='lines',
+               hovertemplate=paste('<b>',sums$category,'</b><br>Date=%{x}<br>Sum=%{y:.2f}')) %>% 
+  plotly::layout(xaxis=list(title='Date'),
+         yaxis=list(title='Summation'),
+         title = 'Total Expenditure of Energy',
+         showlegend=FALSE)
+fig
 ```
 
 
@@ -20,3 +33,5 @@ to prevent greenhouse gas emission, we should consider to appropriately lower ou
 In my design, I combined data from all seven application usage and electric expenditure from home 06, get the sum of these usages, and construct
 a new dataframe. From this dataframe, I show the summation of electric expenditures everyday by different categories. Then when reaching each line,
 you can also notice that I label the exact category, date, and summation at each point, so that you can figure out the exact value at each position.
+
+
