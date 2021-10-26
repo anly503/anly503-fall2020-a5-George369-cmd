@@ -2,7 +2,9 @@ name: "my-website"
 navbar:
   title: "My Website"
   left:
-    - text: "1st Vis"
+    - text: "Plotly Question"
       href: index.html
-    - text: "2nd Vis"
+    - text: "Altair"
       href: about.html
+    - text: "Plotly"
+      href: pyplot.html
